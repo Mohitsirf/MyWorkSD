@@ -1,0 +1,198 @@
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$sd-primary: (
+  50 : #fafafa,
+  100 : #f2f2f2,
+  200 : #e9e9e9,
+  300 : #e0e0e0,
+  400 : #dadada,
+  500 : #d3d3d3,
+  600 : #cecece,
+  700 : #c8c8c8,
+  800 : #c2c2c2,
+  900 : #b7b7b7,
+  A100 : #ffffff,
+  A200 : #ffffff,
+  A400 : #ffffff,
+  A700 : #fff5f5,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$sd-accent: (
+  50 : #e3e6e9,
+  100 : #b8c1c9,
+  200 : #8998a5,
+  300 : #5a6e81,
+  400 : #364f66,
+  500 : #13304b,
+  600 : #112b44,
+  700 : #0e243b,
+  800 : #0b1e33,
+  900 : #061323,
+  A100 : #609cff,
+  A200 : #2d7cff,
+  A400 : #005ef9,
+  A700 : #0054e0,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #ffffff,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$sd-palette-primary: mat-palette($sd-primary);
+$sd-palette-accent:  mat-palette($sd-accent);
+
+
+$sd-app-theme: mat-light-theme($sd-palette-primary, $sd-palette-accent);
+@include angular-material-theme($sd-app-theme);
+
+//mixin Gradient for top to bottom
+@mixin linearGradient($top, $bottom){
+  background: $top; /* Old browsers */
+  background: -moz-linear-gradient(top,  $top 0%, $bottom 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  $top 0%,$bottom 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  $top 0%,$bottom 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  $top 0%,$bottom 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  $top 0%,$bottom 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+//mixin Gradient for left to right
+@mixin gradient-horizontal($start-color, $end-color, $start-percent, $end-percent) {
+  background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent); // Opera 12
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1); // IE9 and down
+}
+
+.mat-card{
+  @include linearGradient(#ffffff, #f2f2f2);
+}
+/*
+.mat-input-ripple,.mat-input-underline{
+color:#343434;
+  background-color: #343434;
+}
+.mat-input-placeholder-wrapper,.mat-input-infix {
+  color: #343434;
+}
+
+.mat-tab-label{
+  background-color: rgba(194, 194, 194, 0.3) !important;
+}
+*/
+
+.accent-background {
+  //background-color: mat-palette($sd-accent);
+}
+
+
+/*----SideBar Styling----*/
+
+.mat-expansion-indicator::after{
+  color:white;
+}
+
+.mat-drawer.mat-drawer-side{
+  //Responsible for main background color like a container
+  @include gradient-horizontal(#12304A, #143552 ,0% ,100%);
+}
+
+.ng-trigger-expansion,.mat-expanded{
+  //Currently selected child element (Hover)
+  @include linearGradient(#194267, #194267);
+}
+
+.mat-expansion-panel-header{
+  //Responsible for child background color
+  @include linearGradient(#143552, #143552);
+}
+
+.mat-expansion-panel-body{
+  padding:0 24px 0 !important;
+  background:	#D2D2D2;
+}
+
+.mat-button-toggle-label-content{
+  padding:5px !important;
+}
+
+.mat-expansion-panel-header:focus{
+  @include linearGradient(#194267, #194267);
+}
+
+.mat-expansion-panel-header:hover{
+  //Header Hover
+  @include linearGradient(#194267, #194267);
+}
+
+// Styling of toggle contents inside child elements
+.mat-button-toggle-checked{
+  @include linearGradient(#f2f2f2, #f2f2f2);
+  color:#d0c899 !important;
+}
+
+.mat-button-toggle-label-content:hover{
+  //Child Content Hover
+  @include linearGradient(#f2f2f2, #f2f2f2);
+  color:#d0c899;
+}
+
+.mat-button-toggle{
+  color:#8c8c8c;
+}
+
+.mat-ink-bar{
+  background-color: #13304b !important;
+}
+
+// Styling for header
+
+#mainToolbar{
+  @include linearGradient(#ffffff !important, #ffffcc !important);
+  box-shadow: 1px 1px 5px grey;
+  height:78px!important;
+
+}
+
+.mat-autocomplete-panel.mat-autocomplete-visible,
+.mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover){
+  @include linearGradient(#194267 !important, #194267 !important);
+  color:#ffffff !important;
+}
+
+.mat-option:hover:not(.mat-option-disabled), .mat-option:focus:not(.mat-option-disabled)
+{
+  background : rgba(0,0,0,0.5);
+}
